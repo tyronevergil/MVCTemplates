@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TempData["Application"] = "MVC App";
+}
+
+@Html.Action("Navigation", "Component", ViewContext.RouteData.Values)
+<div class="container h-100">
+    @RenderBody()
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/knockout-3.4.2.js"></script>
+    <script src="~/Scripts/knockout.maping-latest.js"></script>
+    <script src="~/Scripts/knockout.validation.min.js"></script>
+    @RenderSection("Scripts", required: false)
+}

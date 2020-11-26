@@ -1,0 +1,51 @@
+﻿@model WebApplication.Models.UserCreateViewModel
+@{
+    ViewData["Title"] = "New User";
+
+    var userRolesValues = Model.UserRoles;
+    var userRolesModelState = ViewData.ModelState["UserRoles"];
+    if (userRolesModelState != null && userRolesModelState.AttemptedValue != null)
+    {
+        userRolesValues = userRolesModelState.AttemptedValue.Split(',');
+    }
+}
+
+<div class="py-3">
+    @using (Html.BeginForm("Create", "User", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserRoles, new { @class = "pr-3 mb-0" })
+            @foreach (var role in Model.Roles)
+            {
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" name="UserRoles" value="@role" @(userRolesValues.Contains(role) ? "checked" : "") class="form-check-input" />
+                        @role
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TempPassword)
+            @Html.PasswordFor(m => m.TempPassword, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+        @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+        {
+            <div class="alert alert-danger text-danger bg-white bl-1 w-100 mx-auto">
+                <a class="close" data-dismiss="alert"><i class="fa fa-close" aria-hidden="true"></i></a>
+                <h5 class="alert-heading">Error Summary</h5>
+                @Html.ValidationSummary()
+            </div>
+        }
+        <a href="@Url.Action("Index", "User")" class="btn btn-secondary px-3">Back</a>
+        <button type="submit" class="btn btn-primary px-3">Submit</button>
+    }
+</div>

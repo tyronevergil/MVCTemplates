@@ -1,0 +1,31 @@
+﻿@model WebApplication.Models.UsersViewModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<div class="py-3">
+    <a class="btn btn-secondary mb-3" href="@Url.Action("Create", "User")">Create New</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Roles</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: events">
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <th scope="row"><span>@user.Username</span></th>
+                    <td><span>@user.Roles</span></td>
+                    <td class="text-right">
+                        <a href="@Url.Action("Edit", "User", new { @id = user.UserId })" class="text-secondary">Edit</a>
+                        <span> | </span>
+                        <a href="@Url.Action("Delete", "User", new { @id = user.UserId })" class="text-secondary @(String.Equals(User.Identity.Name, user.Username, StringComparison.OrdinalIgnoreCase) ? "disabled" : "")">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

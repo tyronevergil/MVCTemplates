@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Application"] = "MVC App";
+}
+
+@await Component.InvokeAsync("Navigation")
+<div class="container h-100">
+    @RenderBody()
+</div>
+
+@section Scripts {
+    <environment include="Development">
+        <script src="~/lib/knockout/knockout-debug.js"></script>
+        <script src="~/lib/knockout.mapping/knockout.mapping.js"></script>
+        <script src="~/lib/knockout-validation/knockout.validation.js"></script>
+        <script src="~/js/app.init.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"
+                asp-fallback-src="~/lib/knockout/knockout.min.js"
+                asp-fallback-test="window.ko"
+                crossorigin="anonymous"
+                integrity="sha384-/EjRuG6YTb6zCFou+DBnYCi5u9E1RjUMJanyGOL7DUYLp6wSCUuHNhd58uoGj7jh"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js"
+                asp-fallback-src="~/lib/knockout.mapping/knockout.mapping.min.js"
+                asp-fallback-test="window.ko && window.ko.mapping"
+                crossorigin="anonymous"
+                integrity="sha384-5iaafnDCmIZLLNfCHYJwy/FQZf6AXVLgSx8wPvUvkOOOFk7ODxEXwdfxgHW3dv4a"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.4/knockout.validation.min.js"
+                asp-fallback-src="~/lib/knockout-validation/knockout.validation.min.js"
+                asp-fallback-test="window.ko && window.ko.validation"
+                crossorigin="anonymous"
+                integrity="sha384-ZKDj6HEJm1Ph3GStGl5a2woDwsUDr+fu0DUZCkZEvg9/vfX68mDfucoLEI60jgaN"></script>
+        <script src="~/js/app.init.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+    <environment include="Development">
+        <script src="~/lib/aspnet-signalr/signalr.js"></script>
+        <script src="~/js/app.start.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aspnet-signalr/1.1.4/signalr.min.js"
+                asp-fallback-src="~/lib/aspnet-signalr/signalr.min.js"
+                asp-fallback-test="window.signalR"
+                crossorigin="anonymous"
+                integrity="sha384-Axhj+JNYNvvWSxKp/kl1CVoQQYJ/o9HMCvjcqRJZtbdNtBJe35fDAvAS9c48rx3i"></script>
+        <script src="~/js/app.start.js" asp-append-version="true"></script>
+    </environment>
+}

@@ -1,0 +1,62 @@
+﻿@model WebApplication.Models.NavigationViewModel
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand text-success" href="javascript:void(0)">@TempData["Application"]</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto">
+                @foreach (var menu in Model.AppMenus)
+                {
+                    <li class="nav-item @(menu.IsActive ? "active" : "")">
+                        <a class="nav-link" href="@menu.Url">
+                            @menu.Text
+                            @if (menu.IsActive)
+                            {
+                                <span class="sr-only">(current)</span>
+                            }
+                        </a>
+                    </li>
+                }
+                <li class="nav-item d-lg-none"><a class="nav-link" href="@Model.UserMenu.Url">@Model.UserMenu.Text</a></li>
+                @foreach (var menu in Model.UserMenu.SubMenus)
+                {
+                    <li class="nav-item font-weight-light d-lg-none @(menu.IsActive ? "active" : "")">
+                        <a class="nav-link" href="@menu.Url">
+                            &nbsp;&nbsp;&nbsp;@menu.Text
+                            @if (menu.IsActive)
+                            {
+                                <span class="sr-only">(current)</span>
+                            }
+                        </a>
+                    </li>
+                }
+            </ul>
+            <div class="btn-group d-none d-lg-flex">
+                <a class="btn btn-outline-primary" href="@Model.UserMenu.Url">
+                    @Model.UserMenu.Text <i class="fa @(Model.IsAuthenticated ? "fa-sign-out" : "fa-sign-in")" aria-hidden="true"></i>
+                </a>
+                @if (Model.UserMenu.SubMenus.Any())
+                {
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @foreach (var menu in Model.UserMenu.SubMenus)
+                        {
+                            <a class="dropdown-item font-weight-light @(menu.IsActive ? "disabled" : "")" href="@menu.Url">
+                                @menu.Text
+                                @if (menu.IsActive)
+                                {
+                                    <span class="sr-only">(current)</span>
+                                }
+                            </a>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</nav>

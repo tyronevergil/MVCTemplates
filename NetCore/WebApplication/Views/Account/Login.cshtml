@@ -1,0 +1,45 @@
+﻿@model WebApplication.Models.LoginViewModel
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Login";
+}
+
+<div class="row h-100">
+    <div class="col-12 my-auto align-self-center">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewData["ReturnUrl"] }, FormMethod.Post))
+        {
+            <fieldset class="app-account-card card w-75 mx-auto my-3 bg-light">
+                <div class="card-body">
+                    <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Username, new { @class = "sr-only" })
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @autofocus = "autofocus" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "sr-only" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label>
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Sign in
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </fieldset>
+        }
+
+        @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+        {
+            <div class="app-account-alert alert alert-danger text-danger bg-white bl-1 w-100 mx-auto">
+                <a class="close" data-dismiss="alert"><i class="fa fa-close" aria-hidden="true"></i></a>
+                <h5 class="alert-heading">Error Summary</h5>
+                @Html.ValidationSummary()
+            </div>
+        }
+    </div>
+</div>

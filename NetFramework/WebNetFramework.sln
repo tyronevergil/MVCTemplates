@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{A1A8D780-1465-4403-82B8-24B78747097F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{2B0D4DE7-A98B-47D7-8EB6-B11CC602F290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1A8D780-1465-4403-82B8-24B78747097F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A8D780-1465-4403-82B8-24B78747097F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A8D780-1465-4403-82B8-24B78747097F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A8D780-1465-4403-82B8-24B78747097F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B0D4DE7-A98B-47D7-8EB6-B11CC602F290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B0D4DE7-A98B-47D7-8EB6-B11CC602F290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B0D4DE7-A98B-47D7-8EB6-B11CC602F290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B0D4DE7-A98B-47D7-8EB6-B11CC602F290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

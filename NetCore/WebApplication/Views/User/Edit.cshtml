@@ -1,0 +1,66 @@
+﻿@model WebApplication.Models.UserEditViewModel
+@{
+    ViewData["Title"] = "Edit User";
+
+    var userRolesValues = Model.UserRoles;
+    var userRolesModelState = ViewData.ModelState["UserRoles"];
+    if (userRolesModelState != null && userRolesModelState.AttemptedValue != null)
+    {
+        userRolesValues = userRolesModelState.AttemptedValue.Split(',');
+    }
+
+    var isChangePasswordValue = Model.IsChangePassword;
+    var isChangePasswordModelState = ViewData.ModelState["IsChangePassword"];
+    if (isChangePasswordModelState != null && isChangePasswordModelState.AttemptedValue != null)
+    {
+        bool.TryParse(isChangePasswordModelState.AttemptedValue, out isChangePasswordValue);
+    }
+}
+
+<div class="py-3">
+    @using (Html.BeginForm("Edit", "User", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserRoles, new { @class = "pr-3 mb-0" })
+            @foreach (var role in Model.Roles)
+            {
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" name="UserRoles" value="@role" @(userRolesValues.Contains(role) ? "checked" : "") class="form-check-input" />
+                        @role
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input type="checkbox" name="IsChangePassword" class="form-check-input" value="true" @(isChangePasswordValue ? "checked" : "") data-toggle="collapse" data-target="#passwords" />
+                @Html.DisplayNameFor(m => m.IsChangePassword)
+            </label>
+        </div>
+        <div id="passwords" class="collapse @(isChangePasswordValue ? "show" : "")">
+            <div class="form-group">
+                @Html.LabelFor(m => m.TempPassword)
+                @Html.PasswordFor(m => m.TempPassword, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+        {
+            <div class="alert alert-danger text-danger bg-white bl-1 w-100 mx-auto">
+                <a class="close" data-dismiss="alert"><i class="fa fa-close" aria-hidden="true"></i></a>
+                <h5 class="alert-heading">Error Summary</h5>
+                @Html.ValidationSummary()
+            </div>
+        }
+        <a href="@Url.Action("Index", "User")" class="btn btn-secondary px-3">Back</a>
+        <button type="submit" class="btn btn-primary px-3">Update</button>
+    }
+</div>
